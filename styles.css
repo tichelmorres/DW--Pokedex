@@ -1,0 +1,276 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&display=swap");
+
+:root {
+    --ball-red: #d8342b;
+    --ink: #22252b;
+    --paper: #ffffff;
+    --bg: #eef1f6;
+    --soft: #6b7280;
+    --line: #e3e6ec;
+
+    --lens-light: #7fd0ff;
+    --lens-mid: #2f80e8;
+
+    --font: "Nunito", ui-rounded, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+main {
+    width: min(100% - 2rem, 26rem);
+    margin: 0 auto;
+    padding: 3.5rem 0;
+}
+
+h1,
+h2,
+h3,
+p {
+    margin: 0;
+}
+
+h1 {
+    display: flex;
+    align-items: center;
+    gap: 1.125rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+}
+
+h1::before {
+    content: "";
+    flex: none;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 3px solid var(--ink);
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 32% 30%, #fff 0 9%, transparent 10%),
+        radial-gradient(circle at 40% 38%, var(--lens-light), var(--lens-mid) 70%);
+    box-shadow: 0 0 0 3px var(--paper), 0 0 0 6px var(--ink);
+}
+
+h1::after {
+    content: "";
+    flex: none;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-left: auto;
+    border: 3px solid var(--ink);
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 30% 24%, rgba(255, 255, 255, 0.65) 0 7%, transparent 8%),
+        radial-gradient(circle, var(--paper) 0 14%, var(--ink) 15% 27%, transparent 28%),
+        linear-gradient(var(--ball-red) 0 41%, var(--ink) 41% 59%, var(--paper) 59%);
+}
+
+#pokeForm {
+    display: flex;
+    gap: 0.625rem;
+}
+
+#pokeId {
+    flex: 1;
+    min-width: 0;
+    height: 3rem;
+    padding: 0 1.125rem;
+    font: inherit;
+    font-weight: 800;
+    color: var(--ink);
+    background: var(--paper);
+    border: 3px solid var(--ink);
+    border-radius: 999px;
+}
+
+#pokeId::placeholder {
+    color: var(--soft);
+    font-weight: 600;
+}
+
+#pokeForm button {
+    height: 3rem;
+    padding: 0 1.5rem;
+    font: inherit;
+    font-weight: 900;
+    color: #fff;
+    background: var(--ball-red);
+    border: 3px solid var(--ink);
+    border-radius: 999px;
+    box-shadow: 0 4px 0 var(--ink);
+    cursor: pointer;
+    transition: transform 0.08s, box-shadow 0.08s;
+}
+
+#pokeForm button:hover {
+    background: #e23d34;
+}
+
+#pokeForm button:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 var(--ink);
+}
+
+#pokeId:focus-visible,
+#pokeForm button:focus-visible {
+    outline: 3px solid var(--lens-mid);
+    outline-offset: 3px;
+}
+
+#msg {
+    margin-top: 0.875rem;
+    font-size: 0.875rem;
+    font-weight: 800;
+    color: var(--ball-red);
+}
+
+#msg:empty {
+    display: none;
+}
+
+#resultado {
+    margin-top: 2rem;
+    padding-bottom: 1.75rem;
+    overflow: hidden;
+    background: var(--paper);
+    border: 4px solid var(--ink);
+    border-radius: 28px;
+    box-shadow: 0 6px 0 rgba(34, 37, 43, 0.18);
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+}
+
+#resultado:has(#pokeName:empty) {
+    display: none;
+}
+
+#pokeName {
+    justify-self: stretch;
+    grid-column: 1 / -1;
+    padding: 1.5rem 1.25rem 5.5rem;
+    font-size: 2.25rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    text-align: center;
+    color: #fff;
+    background: var(--ball-red);
+    border-bottom: 8px solid var(--ink);
+    text-shadow: 0 2px 0 rgba(0, 0, 0, 0.18);
+}
+
+#pokeSprite {
+    position: relative;
+    z-index: 1;
+    grid-column: 1 / -1;
+    width: 9rem;
+    height: 9rem;
+    margin: calc(-4.5rem - 4px) 0 1.25rem;
+    padding: 0.5rem;
+    object-fit: contain;
+    image-rendering: pixelated;
+    background: var(--paper);
+    border: 8px solid var(--ink);
+    border-radius: 50%;
+    box-shadow:
+        inset 0 0 0 4px #e6e9ef,
+        0 0 0 4px var(--paper);
+}
+
+#pokeSprite[src=""],
+#pokeSprite:not([src]) {
+    display: none;
+}
+
+#pokeHeight,
+#pokeWeight {
+    width: 100%;
+    padding: 0.875rem 0.5rem;
+    font-size: 1rem;
+    font-weight: 800;
+    text-align: center;
+    border-top: 2px solid var(--line);
+}
+
+#pokeHeight {
+    border-right: 2px solid var(--line);
+}
+
+#pokeAbilitiesHead {
+    grid-column: 1 / -1;
+    margin: 1.25rem 0 0.75rem;
+    font-size: 0.9375rem;
+    font-weight: 800;
+    color: var(--soft);
+}
+
+#pokeAbilities {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0 1.25rem;
+}
+
+#pokeAbilities p {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.3125rem 0.875rem 0.3125rem 0.5rem;
+    font-size: 0.9375rem;
+    font-weight: 800;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+}
+
+#pokeAbilities p::before {
+    content: "";
+    flex: none;
+    width: 0.875rem;
+    height: 0.875rem;
+    border: 2px solid var(--ink);
+    border-radius: 25%;
+    background: var(--lens-light) 0 42%;
+}
+
+#pokeAbilities p:empty {
+    display: none;
+}
+
+@media (max-width: 400px) {
+    main {
+        padding: 2rem 0;
+    }
+
+    #pokeName {
+        font-size: 1.875rem;
+        padding-bottom: 5rem;
+    }
+
+    #pokeSprite {
+        width: 8rem;
+        height: 8rem;
+        margin-top: calc(-4rem - 4px);
+    }
+}
