@@ -82,6 +82,16 @@ h1::after {
         linear-gradient(var(--ball-red) 0 41%, var(--ink) 41% 59%, var(--paper) 59%);
 }
 
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
 #pokeForm {
     display: flex;
     gap: 0.625rem;
